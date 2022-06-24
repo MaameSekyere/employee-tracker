@@ -25,3 +25,5 @@ afterConnection = () => {
   console.log("*****************************************");
   questions();
 };
+
+module.exports = db;
