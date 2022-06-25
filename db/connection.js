@@ -10,20 +10,4 @@ const connectInfo = {
 
 const db = mysql.createConnection(connectInfo);
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log("\n WELCOME TO EMPLOYEE TRACKER \n");
-  afterConnection();
-});
-
-afterConnection = () => {
-  console.log("*****************************************");
-  console.log("*                                       *");
-  console.log("*              EMPLOYEE                 *");
-  console.log("*              TRACKER                  *");
-  console.log("*                                       *");
-  console.log("*****************************************");
-  questions();
-};
-
 module.exports = db;
