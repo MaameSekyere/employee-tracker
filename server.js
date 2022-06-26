@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
 const db = require("./db/connection");
-
-// cTable = require("console.table");
+//cTable = require("console.table");
 //const promiseMysql = require("promise-mysql");
 
 db.connect((err) => {
@@ -63,6 +62,10 @@ function questions() {
           addEmployee();
           break;
 
+        case "Update Employee Role":
+          updateEmployeeRole();
+          break;
+
         case "Exit":
           exitApp();
 
@@ -98,7 +101,6 @@ function viewDepartments() {
   var query = `SELECT * FROM department`;
   db.query(query, (err, res) => {
     if (err) throw err;
-    console.log("All department : ");
     console.table(res);
     questions();
   });
@@ -281,6 +283,63 @@ function addDepartment() {
           questions();
         }
       );
+    });
+}
+
+function addRole() {
+  let departmentArr = [];
+
+  promiseMysql
+    .createConnection(connectInfo)
+    .then((cone) => {
+      return cone.query(`SELECT * FROM department `);
+    })
+    .then((departments) => {
+      for (i = 0; i < departments.length; i++) {
+        departmentArr.push(departments[i].department_name);
+      }
+
+      return departments;
+    })
+    .then((departments) => {
+      inquirer
+        .prompt([
+          {
+            name: "roleTitle",
+            type: "input",
+            message: "What is new role title?",
+          },
+          {
+            name: "salary",
+            type: "input",
+            message: "What is the salary of new title?",
+          },
+          {
+            name: "dept",
+            type: "list",
+            message: "which department does new title belong to ?",
+            choices: departmentArr,
+          },
+        ])
+        .then((answer) => {
+          let dept_id;
+
+          for (i = 0; i < departments.length; i++) {
+            if (answer.dept == departments[i].department_name) {
+              dept_id = departments[i].id;
+            }
+          }
+
+          connection.query(
+            `INSERT INTO roles(title,salary,department_id) 
+            VALUES( "${answer.roleTitle}",${answer.salary},${dept_id})`,
+            (err, res) => {
+              if (err) throw err;
+              console.log(`\n Role ${answer.roleTitle} is added . \n`);
+              questions();
+            }
+          );
+        });
     });
 }
 
