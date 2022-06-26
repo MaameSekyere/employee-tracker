@@ -15,9 +15,10 @@ VALUES ("Senior Engineer", 150000, 1),
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
-        ("Maame", "Sekyere", 1,2);
-     ("Sylvia", "Ayisi", 4,NULL),
-      ("Jeff", "Owusu", 3,NULL),
-        ('Lina', 'Wilson',2,1),
-        ('David', 'Green',4, 2),
-       ('Taylor', 'Moore',3,NULL);
+('Maame', 'Sanchez',1,1),
+('John', 'Smith',4,NULL),
+('Kofi', 'Chen',2,NULL),
+('Maria', 'Amo',2,3),
+('Lina', 'Wilson',6,NULL),
+('Koo', 'Green',5,5),
+('Ama', 'Moore',3,NUll);
