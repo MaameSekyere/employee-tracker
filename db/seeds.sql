@@ -4,14 +4,16 @@ INSERT INTO department
     ("Engineering"),
     ("Sales"),
     ("Legal"),
-    ("Accounting");
+    ("Accounting"),
+    ("Human Resource");
 
 INSERT INTO roles (title, salary, department_id)
 VALUES ("Senior Engineer", 150000, 1),
-      ("Intern", 30000, 1),
-      ("Salesperson", 35000, 2),
-      ("Attourney", 50000, 3),
-      ("Accountant", 60000, 4);
+      ("Intern", 30000, 2),
+      ("Salesperson", 35000, 3),
+      ("Attourney", 100000, 4),
+      ("Accountant", 70000, 5),
+      ("HR Rep", 20000, 5);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
