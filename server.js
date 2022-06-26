@@ -258,6 +258,32 @@ function updateEmployeeRole() {
   });
 }
 
+function addDepartment() {
+  inquirer
+    .prompt({
+      type: "text",
+      name: "dep_name",
+      message:
+        "Please enter the name of the department you would like to add: ",
+    })
+    .then((data) => {
+      connection.query(
+        `INSERT INTO department (department_name)
+                VALUES(?)`,
+        [data.dep_name],
+        function (err, results, fields) {
+          if (err) {
+            console.log(err.message);
+            return;
+          }
+
+          console.log("Added department!");
+          questions();
+        }
+      );
+    });
+}
+
 function exitApp() {
   db.end();
 }
