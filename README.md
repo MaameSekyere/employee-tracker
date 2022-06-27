@@ -47,7 +47,8 @@ npm init, npm start, mysql, node server.js
 
 ## Walkthrough Video Link
 
-## Screenshots
+## Screenshot
+<img width="952" alt="Screen Shot 2022-06-26 at 9 33 48 PM" src="https://user-images.githubusercontent.com/94888460/175845676-97ca2f65-933e-4fb5-8c9b-ad27bc3ef5de.png">
 
 ## Contact
 
