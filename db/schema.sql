@@ -1,3 +1,5 @@
+SET foreign_key_checks = 0;
+
 DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS employee;

@@ -1,7 +1,15 @@
 const inquirer = require("inquirer");
 const db = require("./db/connection");
 //cTable = require("console.table");
-//const promiseMysql = require("promise-mysql");
+const promiseMysql = require("promise-mysql");
+
+const connectInfo = {
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "Nollyjemzz1",
+  database: "employee_db",
+};
 
 db.connect((err) => {
   if (err) throw err;
@@ -62,7 +70,7 @@ function questions() {
           addEmployee();
           break;
 
-        case "Update Employee Role":
+        case "Update Employee role":
           updateEmployeeRole();
           break;
 
@@ -183,7 +191,7 @@ function addEmployee() {
 
 function updateEmployeeRole() {
   // Select all roles from table for future ref
-  connection.query(`SELECT * FROM roles`, function (err, results, fields) {
+  db.query(`SELECT * FROM roles`, function (err, results, fields) {
     if (err) {
       console.log(err.message);
       return;
@@ -196,7 +204,7 @@ function updateEmployeeRole() {
     results.forEach((item) => {
       roleArr.push(item.title);
     });
-    connection.query(
+    db.query(
       `SELECT first_name, last_name FROM employee`,
       function (err, results, fields) {
         if (err) {
@@ -240,7 +248,7 @@ function updateEmployeeRole() {
             let last_name = selectedNameArr.pop();
             let first_name = selectedNameArr[0];
 
-            connection.query(
+            db.query(
               `UPDATE employee 
                                     SET role_id = ?
                                     WHERE first_name = ? AND last_name = ?`,
@@ -269,7 +277,7 @@ function addDepartment() {
         "Please enter the name of the department you would like to add: ",
     })
     .then((data) => {
-      connection.query(
+      db.query(
         `INSERT INTO department (department_name)
                 VALUES(?)`,
         [data.dep_name],
@@ -330,7 +338,7 @@ function addRole() {
             }
           }
 
-          connection.query(
+          db.query(
             `INSERT INTO roles(title,salary,department_id) 
             VALUES( "${answer.roleTitle}",${answer.salary},${dept_id})`,
             (err, res) => {
