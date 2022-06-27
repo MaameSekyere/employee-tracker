@@ -2,6 +2,15 @@
 
 # Table of Contents
 
+- [Description](https://github.com/MaameSekyere/employee-tracker#Description)
+- [User Story](https://github.com/MaameSekyere/employee-tracker#user-story)
+- [Acceptance Criteria](https://github.com/MaameSekyere/employee-tracker#acceptance-criteria)
+- [Installation](https://github.com/MaameSekyere/employee-tracker#installation)
+- [Usage](https://github.com/MaameSekyere/employee-tracker#usage)
+- [Walkthrough video link](https://github.com/MaameSekyere/employee-tracker#walkthrough-video-link)
+- [Screenshots](https://github.com/MaameSekyere/employee-tracker#screenshots)
+- [Contact](https://github.com/MaameSekyere/employee-tracker#contact)
+
 # Description
 
 ## User Story
@@ -37,3 +46,9 @@ npm install mysql2, inquirer, express
 npm init, npm start, mysql, node server.js
 
 ## Walkthrough Video Link
+
+## Screenshots
+
+## Contact
+
+Maame Sekyere
