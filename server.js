@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const db = require("./db/connection");
-//cTable = require("console.table");
 const promiseMysql = require("promise-mysql");
 
 const connectInfo = {
