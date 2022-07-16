@@ -13,16 +13,13 @@ const connectInfo = {
 db.connect((err) => {
   if (err) throw err;
   console.log("\n WELCOME TO EMPLOYEE TRACKER \n");
-  afterConnection();
+  postConnection();
 });
 
-afterConnection = () => {
-  console.log("*****************************************");
-  console.log("*                                       *");
-  console.log("*              EMPLOYEE                 *");
-  console.log("*              TRACKER                  *");
-  console.log("*                                       *");
-  console.log("*****************************************");
+postConnection = () => {
+  console.log(
+    "******************WELCOME TO EMPLOYEE TRACKER***********************"
+  );
   questions();
 };
 
@@ -83,7 +80,7 @@ function questions() {
 }
 
 function viewAllEmployees() {
-  let sql = `SELECT employee.id,
+  var sql = `SELECT employee.id,
                         employee.first_name,
                         employee.last_name,
                         roles.title,
@@ -138,7 +135,7 @@ function addEmployee() {
       },
     ])
     .then((answer) => {
-      const crit = [answer.first_name, answer.last_name];
+      const empNames = [answer.first_name, answer.last_name];
       const roleSql = `SELECT roles.id, roles.title FROM roles`;
       db.query(roleSql, (error, data) => {
         if (error) throw error;
@@ -154,7 +151,7 @@ function addEmployee() {
           ])
           .then((roleChoice) => {
             const role = roleChoice.role;
-            crit.push(role);
+            empNames.push(role);
             const managerSql = `SELECT * FROM employee`;
             db.query(managerSql, (error, data) => {
               if (error) throw error;
@@ -173,10 +170,10 @@ function addEmployee() {
                 ])
                 .then((managerChoice) => {
                   const manager = managerChoice.manager;
-                  crit.push(manager);
+                  empNames.push(manager);
                   const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
                                   VALUES (?, ?, ?, ?)`;
-                  db.query(sql, crit, (error) => {
+                  db.query(sql, empNames, (error) => {
                     if (error) throw error;
                     console.log("Employee has been added!");
                     viewAllEmployees();
@@ -189,19 +186,16 @@ function addEmployee() {
 }
 
 function updateEmployeeRole() {
-  // Select all roles from table for future ref
   db.query(`SELECT * FROM roles`, function (err, results, fields) {
     if (err) {
       console.log(err.message);
       return;
     }
 
-    // Create empty array for storing info
-    let roleArr = [];
+    let roleArray = [];
 
-    // for each item in the results array, push the name of the roles to the roles array
     results.forEach((item) => {
-      roleArr.push(item.title);
+      roleArray.push(item.title);
     });
     db.query(
       `SELECT first_name, last_name FROM employee`,
@@ -210,15 +204,15 @@ function updateEmployeeRole() {
           console.log(err.message);
         }
 
-        let nameArr = [];
+        let nameArray = [];
         results.forEach((item) => {
-          nameArr.push(item.first_name);
-          nameArr.push(item.last_name);
+          nameArray.push(item.first_name);
+          nameArray.push(item.last_name);
         });
-        let combinedNameArr = [];
-        for (let i = 0; i < nameArr.length; i += 2) {
-          if (!nameArr[i + 1]) break;
-          combinedNameArr.push(`${nameArr[i]} ${nameArr[i + 1]}`);
+        let allNamesArr = [];
+        for (let i = 0; i < nameArray.length; i += 2) {
+          if (!nameArray[i + 1]) break;
+          allNamesArray.push(`${nameArray[i]} ${nameArray[i + 1]}`);
         }
         inquirer
           .prompt([
@@ -226,26 +220,26 @@ function updateEmployeeRole() {
               type: "list",
               name: "name_select",
               message: "Please select an employee you would like to update",
-              choices: combinedNameArr,
+              choices: allNamesArr,
             },
             {
               type: "list",
               name: "role_select",
               message:
                 "Please select a role you would like your employee to change to:",
-              choices: roleArr,
+              choices: roleArray,
             },
           ])
           .then((data) => {
             let role_id;
-            for (let i = 0; i < roleArr.length; i++) {
-              if (data.role_select === roleArr[i]) {
+            for (let i = 0; i < roleArray.length; i++) {
+              if (data.role_select === roleArray[i]) {
                 role_id = i + 1;
               }
             }
-            let selectedNameArr = data.name_select.split(" ");
-            let last_name = selectedNameArr.pop();
-            let first_name = selectedNameArr[0];
+            let selectedNameArray = data.name_select.split(" ");
+            let last_name = selectedNameArray.pop();
+            let first_name = selectedNameArray[0];
 
             db.query(
               `UPDATE employee 
