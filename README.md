@@ -1,5 +1,7 @@
 # Employee-Tracker
 
+Walkthrough link https://drive.google.com/file/d/1Qyyi8JyQKmnexeXdvpkrwf0Bs0IE1Baw/view
+
 # Table of Contents
 
 - [Description](https://github.com/MaameSekyere/employee-tracker#Description)
@@ -46,6 +48,8 @@ npm install mysql2, inquirer, express
 npm init, npm start, mysql, node server.js
 
 ## Walkthrough Video Link
+
+https://drive.google.com/file/d/1Qyyi8JyQKmnexeXdvpkrwf0Bs0IE1Baw/view
 
 ## Screenshot
 
